@@ -287,6 +287,10 @@
             .voucher-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+            
+            .reserves-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
         }
     </style>
 </head>
@@ -327,6 +331,61 @@
                 <div class="value" id="collectionRate">0<span class="unit">%</span></div>
                 <div class="progress-bar" style="margin-top: 15px;">
                     <div class="progress-fill" id="collectionProgress"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Cash Reserves Section -->
+        <div class="reserves-section" style="background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%); padding: 30px; border-radius: 16px; margin-bottom: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border: 1px solid #e5e7eb;">
+            <h2 style="font-size: 24px; font-weight: 600; color: #1f2937; margin-bottom: 24px;">Cash Reserves Analysis</h2>
+            <div class="reserves-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-bottom: 30px;">
+                <!-- Fall Semester Reserves -->
+                <div class="metric-card">
+                    <div class="label">Fall Semester Reserves</div>
+                    <div class="value" id="fallReserves">$0<span class="unit">M</span></div>
+                    <div class="change positive" style="margin-top: 10px;">
+                        <span style="font-size: 14px; color: #6b7280;">Oct, Nov, Dec, Jan</span>
+                    </div>
+                </div>
+                <!-- Spring Semester Reserves -->
+                <div class="metric-card">
+                    <div class="label">Spring Semester Reserves</div>
+                    <div class="value" id="springReserves">$0<span class="unit">M</span></div>
+                    <div class="change positive" style="margin-top: 10px;">
+                        <span style="font-size: 14px; color: #6b7280;">Feb, Mar, Apr, May, Jun</span>
+                    </div>
+                </div>
+                <!-- Summer Semester Reserves -->
+                <div class="metric-card">
+                    <div class="label">Summer Semester Reserves</div>
+                    <div class="value" id="summerReserves">$0<span class="unit">M</span></div>
+                    <div class="change positive" style="margin-top: 10px;">
+                        <span style="font-size: 14px; color: #6b7280;">Jul, Aug, Sep</span>
+                    </div>
+                </div>
+                <!-- Total Reserves -->
+                <div class="metric-card">
+                    <div class="label">Total Reserves</div>
+                    <div class="value" id="totalReserves">$0<span class="unit">M</span></div>
+                    <div class="change positive" style="margin-top: 10px;">
+                        <span style="font-size: 14px; color: #6b7280;">All Semesters</span>
+                    </div>
+                </div>
+            </div>
+            <div class="charts-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;">
+                <!-- Monthly Reserves Chart -->
+                <div class="chart-card">
+                    <h3>Monthly Reserves Trend</h3>
+                    <div class="chart-container">
+                        <canvas id="monthlyReservesChart"></canvas>
+                    </div>
+                </div>
+                <!-- Semester Comparison Chart -->
+                <div class="chart-card">
+                    <h3>Reserves by Semester</h3>
+                    <div class="chart-container">
+                        <canvas id="semesterReservesChart"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
@@ -496,10 +555,13 @@
         });
         
         // Load time metrics data
-        const timeMetricsData = {"by_day_of_week": {"Monday": 97755.0, "Tuesday": 152982.0, "Wednesday": 238625.0, "Thursday": 306010.0, "Friday": 438544.0, "Saturday": 30190.0, "Sunday": 3300.0}, "by_week_of_month": {"Week 5": 50755.0, "Week 1": 955969.0, "Week 2": 170352.0, "Week 3": 90330.0}, "by_month": {"June 2025": 50755.0, "July 2025": 1216651.0}};
+        const timeMetricsData = {"by_day_of_week": {"Monday": 97755.0, "Tuesday": 152982.0, "Wednesday": 238625.0, "Thursday": 306010.0, "Friday": 438544.0, "Saturday": 38825.0, "Sunday": 3300.0}, "by_week_of_month": {"Week 5": 50755.0, "Week 1": 955969.0, "Week 2": 170352.0, "Week 3": 98965.0}, "by_month": {"June 2025": 50755.0, "July 2025": 1225286.0}, "daily_collections": {"2025-06-30": 50755.0, "2025-07-01": 77842.0, "2025-07-02": 176888.0, "2025-07-03": 254470.0, "2025-07-04": 404624.0, "2025-07-05": 21265.0, "2025-07-06": 3300.0, "2025-07-07": 17580.0, "2025-07-08": 49560.0, "2025-07-09": 38852.0, "2025-07-10": 29755.0, "2025-07-11": 13840.0, "2025-07-12": 8925.0, "2025-07-14": 29420.0, "2025-07-15": 25580.0, "2025-07-16": 22885.0, "2025-07-17": 21785.0, "2025-07-18": 20080.0, "2025-07-19": 8635.0}};
+        
+        // Load reserves data
+        const reservesData = {"last_updated": "2025-07-20 09:27:56", "totals_by_semester": {"Fall": 14470645.748408604, "Spring": 17729072.62452122, "Summer": 0.0, "Total": 32199718.372929823}, "monthly_data": {"October": 1545338.5171131883, "November": 1460873.7246314704, "December": 3774687.9130434785, "January": 7689745.593620466, "February": 4467591.433667782, "March": 3016262.562090893, "April": 2651571.4069119287, "May": 4609937.712374582, "June": 2983709.509476031}, "semester_mapping": {"October": "Fall", "November": "Fall", "December": "Fall", "January": "Fall", "February": "Spring", "March": "Spring", "April": "Spring", "May": "Spring", "June": "Spring"}, "metrics": {"average_monthly_reserves": 3577746.4858810916, "max_monthly_reserves": 7689745.593620466, "min_monthly_reserves": 1460873.7246314704, "max_month": "January", "min_month": "November"}};
         
         // Load dashboard data
-        const dashboardData = {"last_updated": "2025-07-19 13:01:02", "semester": "Summer 2024-2025", "campus_data": {"Beirut": {"name": "Beirut", "total_usd": 969923, "current_semester_usd": 524930, "other_semesters_usd": 444993, "vouchers_usd": {"V1": 489400, "V2": 31650, "V3": 0, "V4": 0}, "student_count_usd": 2894}, "Saida": {"name": "Saida", "total_usd": 293510, "current_semester_usd": 183760, "other_semesters_usd": 109750, "vouchers_usd": {"V1": 157765, "V2": 13625, "V3": 0, "V4": 0}, "student_count_usd": 1015}, "Nabatieh": {"name": "Nabatieh", "total_usd": 241828, "current_semester_usd": 124800, "other_semesters_usd": 117028, "vouchers_usd": {"V1": 110980, "V2": 13360, "V3": 0, "V4": 0}, "student_count_usd": 757}, "Tripoli": {"name": "Tripoli", "total_usd": 350648, "current_semester_usd": 143730, "other_semesters_usd": 206918, "vouchers_usd": {"V1": 125376, "V2": 13369, "V3": 0, "V4": 0}, "student_count_usd": 1133}, "Mount Lebanon": {"name": "Mount Lebanon", "total_usd": 88149, "current_semester_usd": 34445, "other_semesters_usd": 53704, "vouchers_usd": {"V1": 26880, "V2": 2560, "V3": 0, "V4": 0}, "student_count_usd": 247}, "Tyre": {"name": "Tyre", "total_usd": 329091, "current_semester_usd": 195546, "other_semesters_usd": 133545, "vouchers_usd": {"V1": 160519, "V2": 15657, "V3": 0, "V4": 0}, "student_count_usd": 1046}, "Akkar": {"name": "Akkar", "total_usd": 202082, "current_semester_usd": 60195, "other_semesters_usd": 141887, "vouchers_usd": {"V1": 53460, "V2": 4950, "V3": 0, "V4": 0}, "student_count_usd": 495}}, "school_data": {"SoFR": {"name": "Fine Arts", "total_usd": 5890, "current_semester_usd": 3165, "other_semesters_usd": 2725, "percentage": 0.25}, "SoAS": {"name": "Arts & Sciences", "total_usd": 902176, "current_semester_usd": 508664, "other_semesters_usd": 393512, "percentage": 40.13}, "SoEN": {"name": "Engineering", "total_usd": 512208, "current_semester_usd": 189832, "other_semesters_usd": 322376, "percentage": 14.98}, "SoBU": {"name": "Business", "total_usd": 476303, "current_semester_usd": 231615, "other_semesters_usd": 244688, "percentage": 18.27}, "SoPH": {"name": "Pharmacy", "total_usd": 428202, "current_semester_usd": 252945, "other_semesters_usd": 175257, "percentage": 19.96}, "SoED": {"name": "Education", "total_usd": 150452, "current_semester_usd": 81185, "other_semesters_usd": 69267, "percentage": 6.41}}, "totals": {"current_semester_usd": 1267406, "other_semesters_usd": 1207825, "all_collections_usd": 2475231, "voucher_totals_usd": {"V1": 1124380, "V2": 95171, "V3": 0, "V4": 0}, "current_semester_lbp": 17350964000, "other_semesters_lbp": 20197782000, "all_collections_lbp": 37548746000}, "metrics": {"total_semester_collection": 1267406, "total_other_semesters": 1207825, "total_all_collections": 2475231, "students_paid": 7587, "collection_percentage": 24.5, "other_semesters_percentage": 48.8}, "potential_collections": {"usd": {"V1": 2521890, "V2": 2553844, "V3": 0, "V4": 0, "Others": 105720, "Total": 5181454}, "lbp": {"V1": 34070919000, "V2": 28746495000, "V3": 0, "V4": 0, "Others": 1272880000, "Total": 64090294000}}, "actual_collections": {"usd": {"V1": 1124380, "V2": 95171, "V3": 0, "V4": 0, "Others": 47855, "Total": 1267406}, "lbp": {"V1": 15561874000, "V2": 1178095000, "V3": 0, "V4": 0, "Others": 610995000, "Total": 17350964000}}, "collection_percentages": {"usd": {"V1": 44.6, "V2": 3.7, "V3": 0, "V4": 0, "Others": 45.3, "Total": 24.5}, "lbp": {"V1": 45.7, "V2": 4.1, "V3": 0, "V4": 0, "Others": 48.0, "Total": 27.1}}};
+        const dashboardData = {"last_updated": "2025-07-20 09:48:00", "semester": "Summer 2024-2025", "campus_data": {"Beirut": {"name": "Beirut", "total_usd": 976978, "current_semester_usd": 528810, "other_semesters_usd": 448168, "vouchers_usd": {"V1": 492280, "V2": 32650, "V3": 0, "V4": 0}, "student_count_usd": 2913}, "Saida": {"name": "Saida", "total_usd": 294975, "current_semester_usd": 184510, "other_semesters_usd": 110465, "vouchers_usd": {"V1": 157765, "V2": 14375, "V3": 0, "V4": 0}, "student_count_usd": 1019}, "Nabatieh": {"name": "Nabatieh", "total_usd": 243658, "current_semester_usd": 125410, "other_semesters_usd": 118248, "vouchers_usd": {"V1": 111590, "V2": 13360, "V3": 0, "V4": 0}, "student_count_usd": 762}, "Tripoli": {"name": "Tripoli", "total_usd": 353708, "current_semester_usd": 145055, "other_semesters_usd": 208653, "vouchers_usd": {"V1": 126056, "V2": 13784, "V3": 0, "V4": 0}, "student_count_usd": 1142}, "Mount Lebanon": {"name": "Mount Lebanon", "total_usd": 88149, "current_semester_usd": 34445, "other_semesters_usd": 53704, "vouchers_usd": {"V1": 26880, "V2": 2560, "V3": 0, "V4": 0}, "student_count_usd": 247}, "Tyre": {"name": "Tyre", "total_usd": 333041, "current_semester_usd": 197616, "other_semesters_usd": 135425, "vouchers_usd": {"V1": 161889, "V2": 16357, "V3": 0, "V4": 0}, "student_count_usd": 1056}, "Akkar": {"name": "Akkar", "total_usd": 202802, "current_semester_usd": 60195, "other_semesters_usd": 142607, "vouchers_usd": {"V1": 53460, "V2": 4950, "V3": 0, "V4": 0}, "student_count_usd": 497}}, "school_data": {"SoFR": {"name": "Fine Arts", "total_usd": 5890, "current_semester_usd": 3165, "other_semesters_usd": 2725, "percentage": 0.25}, "SoAS": {"name": "Arts & Sciences", "total_usd": 908356, "current_semester_usd": 510279, "other_semesters_usd": 398077, "percentage": 39.99}, "SoEN": {"name": "Engineering", "total_usd": 515213, "current_semester_usd": 190887, "other_semesters_usd": 324326, "percentage": 14.96}, "SoBU": {"name": "Business", "total_usd": 479358, "current_semester_usd": 234190, "other_semesters_usd": 245168, "percentage": 18.35}, "SoPH": {"name": "Pharmacy", "total_usd": 432542, "current_semester_usd": 256335, "other_semesters_usd": 176207, "percentage": 20.09}, "SoED": {"name": "Education", "total_usd": 151952, "current_semester_usd": 81185, "other_semesters_usd": 70767, "percentage": 6.36}}, "totals": {"current_semester_usd": 1276041, "other_semesters_usd": 1217270, "all_collections_usd": 2493311, "voucher_totals_usd": {"V1": 1129920, "V2": 98036, "V3": 0, "V4": 0}, "current_semester_lbp": 17479624000, "other_semesters_lbp": 20358012000, "all_collections_lbp": 37837636000}, "metrics": {"total_semester_collection": 1276041, "total_other_semesters": 1217270, "total_all_collections": 2493311, "students_paid": 7636, "collection_percentage": 24.6, "other_semesters_percentage": 48.8}, "potential_collections": {"usd": {"V1": 2521890, "V2": 2553844, "V3": 0, "V4": 0, "Others": 105720, "Total": 5181454}, "lbp": {"V1": 34070919000, "V2": 28746495000, "V3": 0, "V4": 0, "Others": 1272880000, "Total": 64090294000}}, "actual_collections": {"usd": {"V1": 1129920, "V2": 98036, "V3": 0, "V4": 0, "Others": 48085, "Total": 1276041}, "lbp": {"V1": 15653014000, "V2": 1213165000, "V3": 0, "V4": 0, "Others": 613445000, "Total": 17479624000}}, "collection_percentages": {"usd": {"V1": 44.8, "V2": 3.8, "V3": 0, "V4": 0, "Others": 45.5, "Total": 24.6}, "lbp": {"V1": 45.9, "V2": 4.2, "V3": 0, "V4": 0, "Others": 48.2, "Total": 27.3}}};
         
         let charts = {};
         
@@ -542,13 +604,26 @@
             createVoucherWeekAnalysis();
             updateCollectionRates();
             createTimeMetricsCharts();
+            updateReservesMetrics();
+            createReservesCharts();
         }
         
         // Update last updated time
         function updateLastUpdated() {
             const lastUpdated = new Date(dashboardData.last_updated);
-            document.getElementById('lastUpdated').textContent = 
-                `Last updated: ${lastUpdated.toLocaleDateString()} ${lastUpdated.toLocaleTimeString()}`;
+            // Find the most recent date with data
+            const dailyDates = Object.keys(timeMetricsData.daily_collections || {});
+            let mostRecentDataDate = '';
+            if (dailyDates.length > 0) {
+                // Sort dates and get the most recent
+                dailyDates.sort((a, b) => new Date(b) - new Date(a));
+                mostRecentDataDate = new Date(dailyDates[0]);
+                mostRecentDataDate = mostRecentDataDate.toLocaleDateString();
+            }
+            
+            document.getElementById('lastUpdated').innerHTML = 
+                `Last updated: ${lastUpdated.toLocaleDateString()} ${lastUpdated.toLocaleTimeString()}`
+                + (mostRecentDataDate ? ` <span style="color: #6b7280; font-size: 13px;">(Data through ${mostRecentDataDate})</span>` : '');
         }
         
         // Update metric cards
@@ -1235,6 +1310,190 @@
             } catch (error) {
                 console.error('Error creating time metrics charts:', error);
             }
+        }
+        
+        // Update reserves metrics
+        function updateReservesMetrics() {
+            const totals = reservesData.totals_by_semester;
+            
+            // Fall Reserves
+            document.getElementById('fallReserves').innerHTML = 
+                `$${(totals.Fall / 1000000).toFixed(2)}<span class="unit">M</span>`;
+            
+            // Spring Reserves
+            document.getElementById('springReserves').innerHTML = 
+                `$${(totals.Spring / 1000000).toFixed(2)}<span class="unit">M</span>`;
+            
+            // Summer Reserves
+            document.getElementById('summerReserves').innerHTML = 
+                totals.Summer === 0 ? `<span style="color: #6b7280;">No data yet</span>` : `$${(totals.Summer / 1000000).toFixed(2)}<span class="unit">M</span>`;
+            
+            // Total Reserves
+            document.getElementById('totalReserves').innerHTML = 
+                `$${(totals.Total / 1000000).toFixed(2)}<span class="unit">M</span>`;
+        }
+        
+        // Create reserves charts
+        function createReservesCharts() {
+            // Monthly Reserves Trend Chart
+            const months = Object.keys(reservesData.monthly_data);
+            const monthlyValues = Object.values(reservesData.monthly_data);
+            
+            const monthlyCtx = document.getElementById('monthlyReservesChart').getContext('2d');
+            charts.monthlyReserves = new Chart(monthlyCtx, {
+                type: 'line',
+                data: {
+                    labels: months,
+                    datasets: [{
+                        label: 'Cash Reserves',
+                        data: monthlyValues,
+                        borderColor: '#f59e0b',
+                        backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                        tension: 0.4,
+                        fill: true,
+                        pointRadius: 6,
+                        pointHoverRadius: 8,
+                        pointBackgroundColor: '#f59e0b',
+                        pointBorderColor: '#ffffff',
+                        pointBorderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return 'Reserves: ' + formatCurrency(Math.round(context.raw));
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: '#e5e7eb'
+                            },
+                            ticks: {
+                                callback: function(value) {
+                                    if (value >= 1000000) {
+                                        return '$' + (value / 1000000).toFixed(1) + 'M';
+                                    }
+                                    return '$' + formatNumber(Math.round(value));
+                                }
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: '#e5e7eb'
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Semester Comparison Chart
+            const semesterLabels = ['Fall', 'Spring', 'Summer'];
+            const semesterValues = [
+                reservesData.totals_by_semester.Fall,
+                reservesData.totals_by_semester.Spring,
+                reservesData.totals_by_semester.Summer
+            ];
+            
+            const semesterCtx = document.getElementById('semesterReservesChart').getContext('2d');
+            charts.semesterReserves = new Chart(semesterCtx, {
+                type: 'bar',
+                data: {
+                    labels: semesterLabels,
+                    datasets: [{
+                        label: 'Reserves by Semester',
+                        data: semesterValues,
+                        backgroundColor: [
+                            'rgba(239, 68, 68, 0.8)',   // Fall - Red
+                            'rgba(16, 185, 129, 0.8)',  // Spring - Green
+                            'rgba(59, 130, 246, 0.8)'   // Summer - Blue
+                        ],
+                        borderColor: [
+                            'rgba(239, 68, 68, 1)',
+                            'rgba(16, 185, 129, 1)',
+                            'rgba(59, 130, 246, 1)'
+                        ],
+                        borderWidth: 1,
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    layout: {
+                        padding: {
+                            top: 30,
+                            right: 20,
+                            bottom: 20,
+                            left: 20
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const percentage = ((context.raw / reservesData.totals_by_semester.Total) * 100).toFixed(1);
+                                    return formatCurrency(Math.round(context.raw)) + ' (' + percentage + '%)';
+                                }
+                            }
+                        },
+                        datalabels: {
+                            display: true,
+                            align: 'end',
+                            anchor: 'end',
+                            color: '#1f2937',
+                            font: {
+                                weight: 'bold',
+                                size: 12
+                            },
+                            formatter: function(value, context) {
+                                if (value === 0) return 'No data';
+                                if (value >= 1000000) {
+                                    return '$' + (value / 1000000).toFixed(1) + 'M';
+                                }
+                                return '$' + formatNumber(Math.round(value));
+                            },
+                            offset: 4
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: '#e5e7eb'
+                            },
+                            ticks: {
+                                callback: function(value) {
+                                    if (value >= 1000000) {
+                                        return '$' + (value / 1000000).toFixed(1) + 'M';
+                                    }
+                                    return '$' + formatNumber(Math.round(value));
+                                }
+                            },
+                            max: Math.max(...semesterValues) * 1.15  // Add 15% headroom
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                },
+                plugins: [ChartDataLabels]
+            });
         }
         
         // Initialize on page load
