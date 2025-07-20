@@ -390,6 +390,52 @@
             </div>
         </div>
         
+        <!-- Collection Velocity Indicators -->
+        <div class="velocity-section" style="background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%); padding: 30px; border-radius: 16px; margin-bottom: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border: 1px solid #e5e7eb;">
+            <h2 style="font-size: 24px; font-weight: 600; color: #1f2937; margin-bottom: 24px;">Collection Velocity Indicators</h2>
+            <div class="velocity-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 30px;">
+                <!-- Week-over-Week Growth -->
+                <div class="velocity-card" style="background: #ffffff; padding: 20px; border-radius: 12px; border: 1px solid #e5e7eb;">
+                    <div style="font-size: 14px; color: #6b7280; margin-bottom: 10px;">Week-over-Week Growth</div>
+                    <div style="font-size: 28px; font-weight: 600; color: #1f2937;" id="weekGrowth">--</div>
+                    <div id="weekGrowthTrend" style="font-size: 14px; margin-top: 5px;">
+                        <span id="weekGrowthIcon"></span>
+                        <span id="weekGrowthText"></span>
+                    </div>
+                </div>
+                <!-- Daily Average -->
+                <div class="velocity-card" style="background: #ffffff; padding: 20px; border-radius: 12px; border: 1px solid #e5e7eb;">
+                    <div style="font-size: 14px; color: #6b7280; margin-bottom: 10px;">Daily Collection Average</div>
+                    <div style="font-size: 28px; font-weight: 600; color: #1f2937;" id="dailyAverage">--</div>
+                    <div style="font-size: 14px; color: #6b7280; margin-top: 5px;">Last 7 days</div>
+                </div>
+                <!-- Collection Momentum -->
+                <div class="velocity-card" style="background: #ffffff; padding: 20px; border-radius: 12px; border: 1px solid #e5e7eb;">
+                    <div style="font-size: 14px; color: #6b7280; margin-bottom: 10px;">Collection Momentum</div>
+                    <div style="font-size: 24px; font-weight: 600;" id="momentumStatus">--</div>
+                    <div style="margin-top: 10px;">
+                        <div style="width: 100%; height: 8px; background-color: #e5e7eb; border-radius: 4px; overflow: hidden;">
+                            <div id="momentumBar" style="height: 100%; transition: width 0.5s ease;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Campus Activity Grid -->
+            <div style="margin-bottom: 20px;">
+                <h3 style="font-size: 18px; font-weight: 600; color: #1f2937; margin-bottom: 15px;">Campus Week-over-Week Performance</h3>
+                <div class="campus-activity-grid" style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 15px;" id="campusActivityGrid">
+                    <!-- Campus activity cards will be inserted here -->
+                </div>
+            </div>
+            <!-- Velocity Chart -->
+            <div class="chart-card">
+                <h3>7-Day Collection Trend</h3>
+                <div class="chart-container" style="height: 250px;">
+                    <canvas id="velocityTrendChart"></canvas>
+                </div>
+            </div>
+        </div>
+        
         <!-- Collection Rate Section -->
         <div class="collection-rate-section" style="background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%); padding: 30px; border-radius: 16px; margin-bottom: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border: 1px solid #e5e7eb;">
             <h2 style="font-size: 24px; font-weight: 600; color: #1f2937; margin-bottom: 24px;">Current Semester Collection Progress</h2>
@@ -557,6 +603,9 @@
         // Load time metrics data
         const timeMetricsData = {"by_day_of_week": {"Monday": 97755.0, "Tuesday": 152982.0, "Wednesday": 238625.0, "Thursday": 306010.0, "Friday": 438544.0, "Saturday": 38825.0, "Sunday": 3300.0}, "by_week_of_month": {"Week 5": 50755.0, "Week 1": 955969.0, "Week 2": 170352.0, "Week 3": 98965.0}, "by_month": {"June 2025": 50755.0, "July 2025": 1225286.0}, "daily_collections": {"2025-06-30": 50755.0, "2025-07-01": 77842.0, "2025-07-02": 176888.0, "2025-07-03": 254470.0, "2025-07-04": 404624.0, "2025-07-05": 21265.0, "2025-07-06": 3300.0, "2025-07-07": 17580.0, "2025-07-08": 49560.0, "2025-07-09": 38852.0, "2025-07-10": 29755.0, "2025-07-11": 13840.0, "2025-07-12": 8925.0, "2025-07-14": 29420.0, "2025-07-15": 25580.0, "2025-07-16": 22885.0, "2025-07-17": 21785.0, "2025-07-18": 20080.0, "2025-07-19": 8635.0}};
         
+        // Load campus weekly metrics
+        const campusWeeklyMetrics = {"Beirut": {"last_week_avg": 5240.142857142857, "prev_week_avg": 7494.857142857143, "week_growth": -30.083485818847215, "last_week_total": 36681.0, "prev_week_total": 52464.0, "trend": "down"}, "Saida": {"last_week_avg": 1895.7142857142858, "prev_week_avg": 2195.714285714286, "week_growth": -13.662979830839298, "last_week_total": 13270.0, "prev_week_total": 15370.0, "trend": "down"}, "Nabatieh": {"last_week_avg": 1975.7142857142858, "prev_week_avg": 1839.2857142857142, "week_growth": 7.417475728155347, "last_week_total": 13830.0, "prev_week_total": 12875.0, "trend": "up"}, "Tripoli": {"last_week_avg": 3158.5714285714284, "prev_week_avg": 2679.1428571428573, "week_growth": 17.8948490988589, "last_week_total": 22110.0, "prev_week_total": 18754.0, "trend": "up"}, "Mount Lebanon": {"last_week_avg": 835.7142857142857, "prev_week_avg": 520.0, "week_growth": 60.71428571428571, "last_week_total": 5850.0, "prev_week_total": 3640.0, "trend": "up"}, "Tyre": {"last_week_avg": 2316.4285714285716, "prev_week_avg": 3017.8571428571427, "week_growth": -23.242603550295847, "last_week_total": 16215.0, "prev_week_total": 21125.0, "trend": "down"}, "Akkar": {"last_week_avg": 883.5714285714286, "prev_week_avg": 1336.4285714285713, "week_growth": -33.88562266167824, "last_week_total": 6185.0, "prev_week_total": 9355.0, "trend": "down"}};
+        
         // Load reserves data
         const reservesData = {"last_updated": "2025-07-20 09:27:56", "totals_by_semester": {"Fall": 14470645.748408604, "Spring": 17729072.62452122, "Summer": 0.0, "Total": 32199718.372929823}, "monthly_data": {"October": 1545338.5171131883, "November": 1460873.7246314704, "December": 3774687.9130434785, "January": 7689745.593620466, "February": 4467591.433667782, "March": 3016262.562090893, "April": 2651571.4069119287, "May": 4609937.712374582, "June": 2983709.509476031}, "semester_mapping": {"October": "Fall", "November": "Fall", "December": "Fall", "January": "Fall", "February": "Spring", "March": "Spring", "April": "Spring", "May": "Spring", "June": "Spring"}, "metrics": {"average_monthly_reserves": 3577746.4858810916, "max_monthly_reserves": 7689745.593620466, "min_monthly_reserves": 1460873.7246314704, "max_month": "January", "min_month": "November"}};
         
@@ -606,6 +655,8 @@
             createTimeMetricsCharts();
             updateReservesMetrics();
             createReservesCharts();
+            updateVelocityIndicators();
+            createVelocityChart();
         }
         
         // Update last updated time
@@ -1493,6 +1544,182 @@
                     }
                 },
                 plugins: [ChartDataLabels]
+            });
+        }
+        
+        // Update velocity indicators
+        function updateVelocityIndicators() {
+            const dailyData = timeMetricsData.daily_collections || {};
+            const dates = Object.keys(dailyData).sort();
+            
+            if (dates.length === 0) return;
+            
+            // Calculate week-over-week growth
+            const lastWeekDates = dates.slice(-7);
+            const previousWeekDates = dates.slice(-14, -7);
+            
+            const lastWeekTotal = lastWeekDates.reduce((sum, date) => sum + dailyData[date], 0);
+            const previousWeekTotal = previousWeekDates.reduce((sum, date) => sum + dailyData[date], 0);
+            
+            let weekGrowth = 0;
+            if (previousWeekTotal > 0) {
+                weekGrowth = ((lastWeekTotal - previousWeekTotal) / previousWeekTotal) * 100;
+            }
+            
+            document.getElementById('weekGrowth').textContent = weekGrowth >= 0 ? '+' + weekGrowth.toFixed(1) + '%' : weekGrowth.toFixed(1) + '%';
+            
+            // Update trend indicator
+            const growthTrend = document.getElementById('weekGrowthTrend');
+            if (weekGrowth > 0) {
+                growthTrend.innerHTML = '<span style="color: #10b981;">▲ Increasing</span>';
+            } else if (weekGrowth < 0) {
+                growthTrend.innerHTML = '<span style="color: #ef4444;">▼ Decreasing</span>';
+            } else {
+                growthTrend.innerHTML = '<span style="color: #6b7280;">→ Stable</span>';
+            }
+            
+            // Calculate daily average (last 7 days)
+            const dailyAverage = lastWeekTotal / 7;
+            document.getElementById('dailyAverage').textContent = formatCurrency(Math.round(dailyAverage));
+            
+            // Collection momentum
+            const last3Days = dates.slice(-3).reduce((sum, date) => sum + dailyData[date], 0);
+            const previous3Days = dates.slice(-6, -3).reduce((sum, date) => sum + dailyData[date], 0);
+            
+            let momentum = 'Steady';
+            let momentumColor = '#6b7280';
+            let momentumWidth = '50%';
+            
+            if (last3Days > previous3Days * 1.2) {
+                momentum = 'Accelerating';
+                momentumColor = '#10b981';
+                momentumWidth = '80%';
+            } else if (last3Days < previous3Days * 0.8) {
+                momentum = 'Declining';
+                momentumColor = '#ef4444';
+                momentumWidth = '20%';
+            }
+            
+            document.getElementById('momentumStatus').textContent = momentum;
+            document.getElementById('momentumStatus').style.color = momentumColor;
+            const momentumBar = document.getElementById('momentumBar');
+            momentumBar.style.width = momentumWidth;
+            momentumBar.style.backgroundColor = momentumColor;
+            
+            // Campus activity - analyze last collection date per campus
+            updateCampusActivity();
+        }
+        
+        // Update campus activity grid
+        function updateCampusActivity() {
+            const campusGrid = document.getElementById('campusActivityGrid');
+            const campusData = dashboardData.campus_data;
+            
+            let html = '';
+            
+            Object.entries(campusData).forEach(([key, campus]) => {
+                const metrics = campusWeeklyMetrics[campus.name];
+                
+                if (metrics && metrics.trend !== 'insufficient_data') {
+                    const weekGrowth = metrics.week_growth;
+                    let trendIcon = '→';
+                    let trendColor = '#6b7280';
+                    
+                    if (metrics.trend === 'up') {
+                        trendIcon = '↑';
+                        trendColor = '#10b981';
+                    } else if (metrics.trend === 'down') {
+                        trendIcon = '↓';
+                        trendColor = '#ef4444';
+                    }
+                    
+                    html += `
+                        <div style="background: #ffffff; padding: 15px; border-radius: 8px; border: 1px solid #e5e7eb; text-align: center;">
+                            <div style="font-size: 12px; color: #6b7280; margin-bottom: 5px;">${campus.name}</div>
+                            <div style="font-size: 18px; font-weight: 600; color: ${trendColor};">
+                                ${trendIcon} ${weekGrowth >= 0 ? '+' : ''}${weekGrowth.toFixed(1)}%
+                            </div>
+                            <div style="font-size: 11px; color: #6b7280;">$${Math.round(metrics.last_week_avg).toLocaleString()}/day</div>
+                        </div>
+                    `;
+                } else {
+                    html += `
+                        <div style="background: #ffffff; padding: 15px; border-radius: 8px; border: 1px solid #e5e7eb; text-align: center;">
+                            <div style="font-size: 12px; color: #6b7280; margin-bottom: 5px;">${campus.name}</div>
+                            <div style="font-size: 18px; font-weight: 600; color: #6b7280;">N/A</div>
+                            <div style="font-size: 11px; color: #6b7280;">No data</div>
+                        </div>
+                    `;
+                }
+            });
+            
+            campusGrid.innerHTML = html;
+        }
+        
+        // Create velocity trend chart
+        function createVelocityChart() {
+            const dailyData = timeMetricsData.daily_collections || {};
+            const dates = Object.keys(dailyData).sort().slice(-7);
+            const values = dates.map(date => dailyData[date] / 1000);
+            const labels = dates.map(date => new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }));
+            
+            const ctx = document.getElementById('velocityTrendChart').getContext('2d');
+            if (!ctx) return; // Safety check
+            
+            charts.velocityTrend = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Daily Collections',
+                        data: values,
+                        borderColor: '#3b82f6',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        tension: 0.4,
+                        fill: true,
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
+                        pointBackgroundColor: '#3b82f6',
+                        pointBorderColor: '#ffffff',
+                        pointBorderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return formatCurrency(context.raw * 1000);
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: '#e5e7eb'
+                            },
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + value + 'K';
+                                }
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
             });
         }
         
