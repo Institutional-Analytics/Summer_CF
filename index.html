@@ -525,6 +525,14 @@
             </div>
         </div>
         
+        <!-- Campus Collection Progress Section -->
+        <div class="campus-collection-section" style="background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%); padding: 30px; border-radius: 16px; margin-bottom: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border: 1px solid #e5e7eb;">
+            <h2 style="font-size: 24px; font-weight: 600; color: #1f2937; margin-bottom: 24px;">Campus Collection Progress</h2>
+            <div class="campus-collection-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;" id="campusCollectionGrid">
+                <!-- Campus collection cards will be inserted here -->
+            </div>
+        </div>
+        
         <!-- Voucher Week Analysis Section -->
         <div class="voucher-week-section" style="background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%); padding: 30px; border-radius: 16px; margin-bottom: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border: 1px solid #e5e7eb;">
             <h2 style="font-size: 24px; font-weight: 600; color: #1f2937; margin-bottom: 24px;">Voucher Payment Week Collections</h2>
@@ -601,16 +609,16 @@
         });
         
         // Load time metrics data
-        const timeMetricsData = {"by_day_of_week": {"Monday": 127440.0, "Tuesday": 152982.0, "Wednesday": 238625.0, "Thursday": 306010.0, "Friday": 438544.0, "Saturday": 38825.0, "Sunday": 3910.0}, "by_week_of_month": {"Week 5": 50755.0, "Week 1": 955969.0, "Week 2": 170352.0, "Week 3": 129260.0}, "by_month": {"June 2025": 50755.0, "July 2025": 1255581.0}, "daily_collections": {"2025-06-30": 50755.0, "2025-07-01": 77842.0, "2025-07-02": 176888.0, "2025-07-03": 254470.0, "2025-07-04": 404624.0, "2025-07-05": 21265.0, "2025-07-06": 3300.0, "2025-07-07": 17580.0, "2025-07-08": 49560.0, "2025-07-09": 38852.0, "2025-07-10": 29755.0, "2025-07-11": 13840.0, "2025-07-12": 8925.0, "2025-07-14": 29420.0, "2025-07-15": 25580.0, "2025-07-16": 22885.0, "2025-07-17": 21785.0, "2025-07-18": 20080.0, "2025-07-19": 8635.0, "2025-07-20": 610.0, "2025-07-21": 29685.0}};
+        const timeMetricsData = {"by_day_of_week": {"Monday": 127590.0, "Tuesday": 186487.0, "Wednesday": 238625.0, "Thursday": 306010.0, "Friday": 438544.0, "Saturday": 38825.0, "Sunday": 3910.0}, "by_week_of_month": {"Week 5": 50755.0, "Week 1": 955969.0, "Week 2": 170352.0, "Week 3": 129410.0, "Week 4": 33505.0}, "by_month": {"June 2025": 50755.0, "July 2025": 1289236.0}, "daily_collections": {"2025-06-30": 50755.0, "2025-07-01": 77842.0, "2025-07-02": 176888.0, "2025-07-03": 254470.0, "2025-07-04": 404624.0, "2025-07-05": 21265.0, "2025-07-06": 3300.0, "2025-07-07": 17580.0, "2025-07-08": 49560.0, "2025-07-09": 38852.0, "2025-07-10": 29755.0, "2025-07-11": 13840.0, "2025-07-12": 8925.0, "2025-07-14": 29420.0, "2025-07-15": 25580.0, "2025-07-16": 22885.0, "2025-07-17": 21785.0, "2025-07-18": 20080.0, "2025-07-19": 8635.0, "2025-07-20": 610.0, "2025-07-21": 29835.0, "2025-07-22": 33505.0}};
         
         // Load campus weekly metrics
-        const campusWeeklyMetrics = {"Beirut": {"last_week_avg": 4982.142857142857, "prev_week_avg": 8840.0, "week_growth": -43.64091790562379, "last_week_total": 34875.0, "prev_week_total": 61880.0, "trend": "down"}, "Saida": {"last_week_avg": 916.4285714285714, "prev_week_avg": 3712.1428571428573, "week_growth": -75.31268039253415, "last_week_total": 6415.0, "prev_week_total": 25985.0, "trend": "down"}, "Nabatieh": {"last_week_avg": 1678.2857142857142, "prev_week_avg": 3626.4285714285716, "week_growth": -53.720701201496944, "last_week_total": 11748.0, "prev_week_total": 25385.0, "trend": "down"}, "Tripoli": {"last_week_avg": 2829.285714285714, "prev_week_avg": 3378.4285714285716, "week_growth": -16.25438707767771, "last_week_total": 19805.0, "prev_week_total": 23649.0, "trend": "down"}, "Mount Lebanon": {"last_week_avg": 901.4285714285714, "prev_week_avg": 688.5714285714286, "week_growth": 30.912863070539427, "last_week_total": 6310.0, "prev_week_total": 4820.0, "trend": "up"}, "Tyre": {"last_week_avg": 1676.4285714285713, "prev_week_avg": 4043.5714285714284, "week_growth": -58.540893835011474, "last_week_total": 11735.0, "prev_week_total": 28305.0, "trend": "down"}, "Akkar": {"last_week_avg": 1116.4285714285713, "prev_week_avg": 1842.142857142857, "week_growth": -39.39511438542071, "last_week_total": 7815.0, "prev_week_total": 12895.0, "trend": "down"}};
+        const campusWeeklyMetrics = {"Beirut": {"last_week_avg": 5573.285714285715, "prev_week_avg": 3015.0, "week_growth": 84.85193082208009, "last_week_total": 39013.0, "prev_week_total": 21105.0, "trend": "up"}, "Saida": {"last_week_avg": 1897.857142857143, "prev_week_avg": 2300.714285714286, "week_growth": -17.510090034150885, "last_week_total": 13285.0, "prev_week_total": 16105.0, "trend": "down"}, "Nabatieh": {"last_week_avg": 1678.2857142857142, "prev_week_avg": 2031.4285714285713, "week_growth": -17.383966244725737, "last_week_total": 11748.0, "prev_week_total": 14220.0, "trend": "down"}, "Tripoli": {"last_week_avg": 3219.8571428571427, "prev_week_avg": 2839.5714285714284, "week_growth": 13.3923630326508, "last_week_total": 22539.0, "prev_week_total": 19877.0, "trend": "up"}, "Mount Lebanon": {"last_week_avg": 1130.0, "prev_week_avg": 506.42857142857144, "week_growth": 123.13117066290549, "last_week_total": 7910.0, "prev_week_total": 3545.0, "trend": "up"}, "Tyre": {"last_week_avg": 1676.4285714285713, "prev_week_avg": 2415.0, "week_growth": -30.582667849748603, "last_week_total": 11735.0, "prev_week_total": 16905.0, "trend": "down"}, "Akkar": {"last_week_avg": 867.8571428571429, "prev_week_avg": 1156.4285714285713, "week_growth": -24.953675108091407, "last_week_total": 6075.0, "prev_week_total": 8095.0, "trend": "down"}};
         
         // Load reserves data
-        const reservesData = {"last_updated": "2025-07-22 08:49:41", "totals_by_semester": {"Fall": 14470645.748408604, "Spring": 17729072.62452122, "Summer": 0.0, "Total": 32199718.372929823}, "monthly_data": {"October": 1545338.5171131883, "November": 1460873.7246314704, "December": 3774687.9130434785, "January": 7689745.593620466, "February": 4467591.433667782, "March": 3016262.562090893, "April": 2651571.4069119287, "May": 4609937.712374582, "June": 2983709.509476031}, "semester_mapping": {"October": "Fall", "November": "Fall", "December": "Fall", "January": "Fall", "February": "Spring", "March": "Spring", "April": "Spring", "May": "Spring", "June": "Spring"}, "metrics": {"average_monthly_reserves": 3577746.4858810916, "max_monthly_reserves": 7689745.593620466, "min_monthly_reserves": 1460873.7246314704, "max_month": "January", "min_month": "November"}};
+        const reservesData = {"last_updated": "2025-07-23 08:49:26", "totals_by_semester": {"Fall": 14470645.748408604, "Spring": 17729072.62452122, "Summer": 0.0, "Total": 32199718.372929823}, "monthly_data": {"October": 1545338.5171131883, "November": 1460873.7246314704, "December": 3774687.9130434785, "January": 7689745.593620466, "February": 4467591.433667782, "March": 3016262.562090893, "April": 2651571.4069119287, "May": 4609937.712374582, "June": 2983709.509476031}, "semester_mapping": {"October": "Fall", "November": "Fall", "December": "Fall", "January": "Fall", "February": "Spring", "March": "Spring", "April": "Spring", "May": "Spring", "June": "Spring"}, "metrics": {"average_monthly_reserves": 3577746.4858810916, "max_monthly_reserves": 7689745.593620466, "min_monthly_reserves": 1460873.7246314704, "max_month": "January", "min_month": "November"}};
         
         // Load dashboard data
-        const dashboardData = {"last_updated": "2025-07-22 08:48:17", "semester": "Summer 2024-2025", "campus_data": {"Beirut": {"name": "Beirut", "total_usd": 1003038, "current_semester_usd": 540795, "other_semesters_usd": 462243, "vouchers_usd": {"V1": 501710, "V2": 35205, "V3": 0, "V4": 0}, "student_count_usd": 2995}, "Saida": {"name": "Saida", "total_usd": 299440, "current_semester_usd": 187375, "other_semesters_usd": 112065, "vouchers_usd": {"V1": 159015, "V2": 15250, "V3": 0, "V4": 0}, "student_count_usd": 1035}, "Nabatieh": {"name": "Nabatieh", "total_usd": 255706, "current_semester_usd": 128580, "other_semesters_usd": 127126, "vouchers_usd": {"V1": 114390, "V2": 13730, "V3": 0, "V4": 0}, "student_count_usd": 794}, "Tripoli": {"name": "Tripoli", "total_usd": 365153, "current_semester_usd": 150195, "other_semesters_usd": 214958, "vouchers_usd": {"V1": 129496, "V2": 15054, "V3": 0, "V4": 0}, "student_count_usd": 1178}, "Mount Lebanon": {"name": "Mount Lebanon", "total_usd": 91924, "current_semester_usd": 35450, "other_semesters_usd": 56474, "vouchers_usd": {"V1": 26880, "V2": 2745, "V3": 0, "V4": 0}, "student_count_usd": 257}, "Tyre": {"name": "Tyre", "total_usd": 341181, "current_semester_usd": 201526, "other_semesters_usd": 139655, "vouchers_usd": {"V1": 163829, "V2": 17367, "V3": 0, "V4": 0}, "student_count_usd": 1080}, "Akkar": {"name": "Akkar", "total_usd": 208652, "current_semester_usd": 62415, "other_semesters_usd": 146237, "vouchers_usd": {"V1": 55070, "V2": 5155, "V3": 0, "V4": 0}, "student_count_usd": 509}}, "school_data": {"SoFR": {"name": "Fine Arts", "total_usd": 6040, "current_semester_usd": 3165, "other_semesters_usd": 2875, "percentage": 0.24}, "SoAS": {"name": "Arts & Sciences", "total_usd": 937996, "current_semester_usd": 524194, "other_semesters_usd": 413802, "percentage": 40.13}, "SoEN": {"name": "Engineering", "total_usd": 525906, "current_semester_usd": 195062, "other_semesters_usd": 330844, "percentage": 14.93}, "SoBU": {"name": "Business", "total_usd": 500723, "current_semester_usd": 240790, "other_semesters_usd": 259933, "percentage": 18.43}, "SoPH": {"name": "Pharmacy", "total_usd": 437512, "current_semester_usd": 260465, "other_semesters_usd": 177047, "percentage": 19.94}, "SoED": {"name": "Education", "total_usd": 156917, "current_semester_usd": 82660, "other_semesters_usd": 74257, "percentage": 6.33}}, "totals": {"current_semester_usd": 1306336, "other_semesters_usd": 1258758, "all_collections_usd": 2565094, "voucher_totals_usd": {"V1": 1150390, "V2": 104506, "V3": 0, "V4": 0}, "current_semester_lbp": 17877154000, "other_semesters_lbp": 20984722000, "all_collections_lbp": 38861876000}, "metrics": {"total_semester_collection": 1306336, "total_other_semesters": 1258758, "total_all_collections": 2565094, "students_paid": 7848, "collection_percentage": 25.2, "other_semesters_percentage": 49.1}, "potential_collections": {"usd": {"V1": 2521890, "V2": 2553844, "V3": 0, "V4": 0, "Others": 105720, "Total": 5181454}, "lbp": {"V1": 34070919000, "V2": 28746495000, "V3": 0, "V4": 0, "Others": 1272880000, "Total": 64090294000}}, "actual_collections": {"usd": {"V1": 1150390, "V2": 104506, "V3": 0, "V4": 0, "Others": 51440, "Total": 1306336}, "lbp": {"V1": 15933679000, "V2": 1287435000, "V3": 0, "V4": 0, "Others": 656040000, "Total": 17877154000}}, "collection_percentages": {"usd": {"V1": 45.6, "V2": 4.1, "V3": 0, "V4": 0, "Others": 48.7, "Total": 25.2}, "lbp": {"V1": 46.8, "V2": 4.5, "V3": 0, "V4": 0, "Others": 51.5, "Total": 27.9}}};
+        const dashboardData = {"last_updated": "2025-07-23 09:11:39", "semester": "Summer 2024-2025", "campus_data": {"Beirut": {"name": "Beirut", "total_usd": 1028763, "current_semester_usd": 553950, "other_semesters_usd": 474813, "vouchers_usd": {"V1": 509440, "V2": 40630, "V3": 0, "V4": 0}, "student_count_usd": 3062, "potential_usd": 2150624, "potential_lbp": 26052556000, "collection_rate": 25.8}, "Saida": {"name": "Saida", "total_usd": 311890, "current_semester_usd": 195085, "other_semesters_usd": 116805, "vouchers_usd": {"V1": 159935, "V2": 19400, "V3": 0, "V4": 0}, "student_count_usd": 1077, "potential_usd": 651596, "potential_lbp": 8446165000, "collection_rate": 29.9}, "Nabatieh": {"name": "Nabatieh", "total_usd": 261686, "current_semester_usd": 131955, "other_semesters_usd": 129731, "vouchers_usd": {"V1": 116680, "V2": 14585, "V3": 0, "V4": 0}, "student_count_usd": 812, "potential_usd": 516429, "potential_lbp": 5916050000, "collection_rate": 25.6}, "Tripoli": {"name": "Tripoli", "total_usd": 379332, "current_semester_usd": 154045, "other_semesters_usd": 225287, "vouchers_usd": {"V1": 130756, "V2": 16974, "V3": 0, "V4": 0}, "student_count_usd": 1232, "potential_usd": 690898, "potential_lbp": 9232125000, "collection_rate": 22.3}, "Mount Lebanon": {"name": "Mount Lebanon", "total_usd": 93914, "current_semester_usd": 35990, "other_semesters_usd": 57924, "vouchers_usd": {"V1": 27340, "V2": 2745, "V3": 0, "V4": 0}, "student_count_usd": 265, "potential_usd": 153234, "potential_lbp": 1959335000, "collection_rate": 23.5}, "Tyre": {"name": "Tyre", "total_usd": 347535, "current_semester_usd": 203091, "other_semesters_usd": 144444, "vouchers_usd": {"V1": 164709, "V2": 17572, "V3": 0, "V4": 0}, "student_count_usd": 1099, "potential_usd": 670415, "potential_lbp": 8402310000, "collection_rate": 30.3}, "Akkar": {"name": "Akkar", "total_usd": 214727, "current_semester_usd": 65875, "other_semesters_usd": 148852, "vouchers_usd": {"V1": 56600, "V2": 6785, "V3": 0, "V4": 0}, "student_count_usd": 523, "potential_usd": 343515, "potential_lbp": 4475870000, "collection_rate": 19.2}}, "school_data": {"SoFR": {"name": "Fine Arts", "total_usd": 6040, "current_semester_usd": 3165, "other_semesters_usd": 2875, "percentage": 0.24}, "SoAS": {"name": "Arts & Sciences", "total_usd": 965695, "current_semester_usd": 535194, "other_semesters_usd": 430501, "percentage": 39.94}, "SoEN": {"name": "Engineering", "total_usd": 541665, "current_semester_usd": 201317, "other_semesters_usd": 340348, "percentage": 15.02}, "SoBU": {"name": "Business", "total_usd": 512893, "current_semester_usd": 244965, "other_semesters_usd": 267928, "percentage": 18.28}, "SoPH": {"name": "Pharmacy", "total_usd": 449902, "current_semester_usd": 270425, "other_semesters_usd": 179477, "percentage": 20.18}, "SoED": {"name": "Education", "total_usd": 161652, "current_semester_usd": 84925, "other_semesters_usd": 76727, "percentage": 6.34}}, "totals": {"current_semester_usd": 1339991, "other_semesters_usd": 1297856, "all_collections_usd": 2637847, "voucher_totals_usd": {"V1": 1165460, "V2": 118691, "V3": 0, "V4": 0}, "current_semester_lbp": 18366874000, "other_semesters_lbp": 21545702000, "all_collections_lbp": 39912576000}, "metrics": {"total_semester_collection": 1339991, "total_other_semesters": 1297856, "total_all_collections": 2637847, "students_paid": 8070, "collection_percentage": 25.9, "other_semesters_percentage": 49.2}, "potential_collections": {"usd": {"V1": 2521890, "V2": 2550316, "V3": 0, "V4": 0, "Others": 104505, "Total": 5176711}, "lbp": {"V1": 34070919000, "V2": 28794632000, "V3": 0, "V4": 0, "Others": 1313830000, "Total": 64179381000}}, "actual_collections": {"usd": {"V1": 1165460, "V2": 118691, "V3": 0, "V4": 0, "Others": 55840, "Total": 1339991}, "lbp": {"V1": 16170174000, "V2": 1470660000, "V3": 0, "V4": 0, "Others": 726040000, "Total": 18366874000}}, "collection_percentages": {"usd": {"V1": 46.2, "V2": 4.7, "V3": 0, "V4": 0, "Others": 53.4, "Total": 25.9}, "lbp": {"V1": 47.5, "V2": 5.1, "V3": 0, "V4": 0, "Others": 55.3, "Total": 28.6}}};
         
         let charts = {};
         
@@ -650,6 +658,7 @@
             createVoucherTrendChart();
             createSchoolChart();
             createTable();
+            createCampusCollectionCards();
             createVoucherWeekAnalysis();
             updateCollectionRates();
             createTimeMetricsCharts();
@@ -1042,6 +1051,60 @@
             });
             
             tbody.innerHTML = html;
+        }
+        
+        // Create campus collection progress cards
+        function createCampusCollectionCards() {
+            const container = document.getElementById('campusCollectionGrid');
+            const campusData = dashboardData.campus_data;
+            
+            let html = '';
+            
+            // Sort campuses by collection rate
+            const sortedCampuses = Object.entries(campusData)
+                .sort((a, b) => (b[1].collection_rate || 0) - (a[1].collection_rate || 0));
+            
+            sortedCampuses.forEach(([key, campus]) => {
+                const collectionRate = campus.collection_rate || 0;
+                const potentialUSD = campus.potential_usd || 0;
+                const currentCollection = campus.current_semester_usd;
+                const uncollected = potentialUSD - currentCollection;
+                
+                // Determine color based on collection rate
+                let progressColor = '#ef4444'; // Red for < 20%
+                if (collectionRate >= 40) progressColor = '#10b981'; // Green for >= 40%
+                else if (collectionRate >= 20) progressColor = '#f59e0b'; // Orange for 20-40%
+                
+                html += `
+                    <div style="background: #ffffff; padding: 20px; border-radius: 12px; border: 1px solid #e5e7eb;">
+                        <h4 style="font-size: 18px; font-weight: 600; color: #1f2937; margin-bottom: 15px;">${campus.name}</h4>
+                        
+                        <div style="margin-bottom: 15px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                <span style="font-size: 14px; color: #6b7280;">Collected</span>
+                                <span style="font-size: 16px; font-weight: 600; color: #1f2937;">${formatCurrency(currentCollection)}</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                <span style="font-size: 14px; color: #6b7280;">Potential</span>
+                                <span style="font-size: 14px; color: #6b7280;">${formatCurrency(potentialUSD)}</span>
+                            </div>
+                        </div>
+                        
+                        <div style="position: relative; width: 100%; height: 30px; background-color: #e5e7eb; border-radius: 6px; overflow: visible; margin-bottom: 10px;">
+                            <div style="height: 100%; background: ${progressColor}; border-radius: 6px; transition: width 0.5s ease; position: relative; width: ${Math.min(collectionRate, 100)}%;">
+                                <span style="position: absolute; right: ${collectionRate < 15 ? '-50px' : '8px'}; top: 50%; transform: translateY(-50%); color: ${collectionRate < 15 ? '#374151' : 'white'}; font-weight: 600; font-size: 14px;">${collectionRate}%</span>
+                            </div>
+                        </div>
+                        
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 13px; color: #6b7280;">Uncollected</span>
+                            <span style="font-size: 13px; color: #ef4444; font-weight: 600;">${formatCurrency(uncollected)}</span>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
         }
         
         // Create voucher week analysis
@@ -1661,7 +1724,15 @@
             const dailyData = timeMetricsData.daily_collections || {};
             const dates = Object.keys(dailyData).sort().slice(-7);
             const values = dates.map(date => dailyData[date] / 1000);
-            const labels = dates.map(date => new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }));
+            
+            // Create labels with day of week
+            const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            const labels = dates.map(date => {
+                const d = new Date(date);
+                const dayOfWeek = dayNames[d.getDay()];
+                const monthDay = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+                return `${monthDay} (${dayOfWeek})`;
+            });
             
             const ctx = document.getElementById('velocityTrendChart').getContext('2d');
             if (!ctx) return; // Safety check
